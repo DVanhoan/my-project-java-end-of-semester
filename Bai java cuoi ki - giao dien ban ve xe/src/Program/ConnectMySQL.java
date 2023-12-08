@@ -26,19 +26,16 @@ public class ConnectMySQL {
                         + "  " + rs.getString(3));
             }
 
-
-
-
-
-
-
-
             connection.close();
 
+
+
+            // chao cac ban da doi
             System.out.println("Suscessful!!!!!!!!");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error!!!!!!!!");
             e.printStackTrace();
         }
+
     }
 }
