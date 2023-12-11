@@ -1,6 +1,7 @@
 package Test;
 
 import View.Tab1_View;
+import View.Tab2_View;
 
 import javax.swing.*;
 
