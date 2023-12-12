@@ -1,41 +1,49 @@
 package Program;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class ConnectMySQL {
-    public static void main(String[] args) {
+    public static Connection getConnection() throws SQLException {
+        Connection c = null;
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3306/testdb?useSSL=false";
-            String user = "root";
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+            String url = "jdbc:mySQL://127.0.0.1:3306/QuanLYBanVe?useSSL=false";
+            String username = "root";
             String password = "duongvanhoan22082005";
 
-            Connection connection = (Connection) DriverManager.getConnection(url, user, password);
+            // tao ket noi
+            c = DriverManager.getConnection(url, username, password);
 
-            Statement stmt = connection.createStatement();
+            System.out.println("suscesful!!!");
+        } catch (SQLException e) {
+            System.out.println("Error!!!");
+            e.printStackTrace();
+        }
+        return c;
+    }
 
-            ResultSet rs = stmt.executeQuery("select * from student");
-
-            while (rs.next()){
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2)
-                        + "  " + rs.getString(3));
+    public static void closeConnection(Connection c){
+        try {
+            if (c != null){
+                c.close();
             }
-
-            connection.close();
-
-
-
-            // chao cac ban da doi
-            System.out.println("Suscessful!!!!!!!!");
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error!!!!!!!!");
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
 
+    }
+    public static void printfInfo(Connection c){
+        if (c!=null){
+            try {
+                DatabaseMetaData mtdt = c.getMetaData();
+                System.out.println(mtdt.getDatabaseProductName());
+                System.out.println(mtdt.getDatabaseProductVersion());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

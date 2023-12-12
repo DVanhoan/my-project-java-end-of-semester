@@ -1,15 +1,13 @@
 package Test;
 
-import View.Tab1_View;
-import View.Tab2_View;
-
+import View.Login;
 import javax.swing.*;
 
 public class Test {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            new Tab1_View();
+            new Login();
         }
         catch (Exception e){
             e.printStackTrace();
