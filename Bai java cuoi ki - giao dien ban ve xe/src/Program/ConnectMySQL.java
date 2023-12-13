@@ -5,45 +5,36 @@ import java.sql.*;
 
 public class ConnectMySQL {
     public static Connection getConnection() throws SQLException {
-        Connection c = null;
+        Connection con = null;
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            String url = "jdbc:mySQL://127.0.0.1:3306/QuanLYBanVe?useSSL=false";
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mySQL://127.0.0.1:3306/NhaSach?useSSL=false";
             String username = "root";
             String password = "duongvanhoan22082005";
 
             // tao ket noi
-            c = DriverManager.getConnection(url, username, password);
+            con = DriverManager.getConnection(url, username, password);
 
             System.out.println("suscesful!!!");
         } catch (SQLException e) {
             System.out.println("Error!!!");
+
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return c;
+        return con;
     }
 
-    public static void closeConnection(Connection c){
+    public static void closeConnection(Connection con){
         try {
-            if (c != null){
-                c.close();
+            if (con != null){
+                con.close();
             }
         }
         catch (Exception e){
             e.printStackTrace();
         }
 
-    }
-    public static void printfInfo(Connection c){
-        if (c!=null){
-            try {
-                DatabaseMetaData mtdt = c.getMetaData();
-                System.out.println(mtdt.getDatabaseProductName());
-                System.out.println(mtdt.getDatabaseProductVersion());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
