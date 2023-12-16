@@ -22,9 +22,7 @@ public class JDBCUtil {
             String sql = "insert into ChuyenXe(maChuyenXe, diemDi, diemDen, NgayKhoiHanh, SoVeDaBan)";
             System.out.println();
 
-            System.out.println("suscesful!!!");
         } catch (SQLException e) {
-            System.out.println("Error!!!");
             e.printStackTrace();
         }
         return c;
